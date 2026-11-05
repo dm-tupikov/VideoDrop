@@ -1,0 +1,130 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="VideoDrop" Width="1060" Height="790" MinWidth="900" MinHeight="720" WindowStartupLocation="CenterScreen" Background="#F5F6FA" FontFamily="Segoe UI" FontSize="14" Foreground="#182338" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources>
+    <SolidColorBrush x:Key="Accent" Color="#5C50E5"/>
+    <Style TargetType="Button">
+      <Setter Property="Cursor" Value="Hand"/><Setter Property="Padding" Value="16,10"/>
+      <Setter Property="Background" Value="White"/><Setter Property="Foreground" Value="#34415B"/>
+      <Setter Property="BorderBrush" Value="#DFE3ED"/><Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="FontWeight" Value="SemiBold"/><Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Border x:Name="Chrome" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="9" Padding="{TemplateBinding Padding}">
+          <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Chrome" Property="Opacity" Value="0.82"/></Trigger>
+          <Trigger Property="IsPressed" Value="True"><Setter TargetName="Chrome" Property="Opacity" Value="0.65"/></Trigger>
+          <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Chrome" Property="Opacity" Value="0.4"/></Trigger>
+          <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Chrome" Property="BorderBrush" Value="#958CF4"/><Setter TargetName="Chrome" Property="BorderThickness" Value="2"/></Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style x:Key="Nav" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="HorizontalContentAlignment" Value="Left"/><Setter Property="Background" Value="Transparent"/><Setter Property="Foreground" Value="#ADB6CB"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="14,12"/>
+    </Style>
+    <Style TargetType="TextBox">
+      <Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Foreground" Value="#182338"/><Setter Property="CaretBrush" Value="#5C50E5"/>
+      <Setter Property="SelectionBrush" Value="#DAD5FF"/><Setter Property="Padding" Value="0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="ComboBox">
+      <Setter Property="Height" Value="42"/><Setter Property="Background" Value="#F8F9FC"/>
+      <Setter Property="BorderBrush" Value="#E0E4EE"/><Setter Property="Padding" Value="14,8"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ComboBox">
+        <Grid>
+          <ToggleButton Focusable="False" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+            <ToggleButton.Template><ControlTemplate TargetType="ToggleButton"><Border Background="#F8F9FC" BorderBrush="#DFE3ED" BorderThickness="1" CornerRadius="8"><TextBlock Text="⌄" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,13,0" Foreground="#7E879B"/></Border></ControlTemplate></ToggleButton.Template>
+          </ToggleButton>
+          <ContentPresenter Margin="14,0,30,0" VerticalAlignment="Center" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}"/>
+          <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+            <Border Background="White" BorderBrush="#DFE3ED" BorderThickness="1" CornerRadius="8" Padding="6" MinWidth="{TemplateBinding ActualWidth}" Margin="0,4,0,0"><ScrollViewer MaxHeight="280"><ItemsPresenter/></ScrollViewer></Border>
+          </Popup>
+        </Grid>
+        <ControlTemplate.Triggers><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.4"/></Trigger></ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style TargetType="ComboBoxItem"><Setter Property="Padding" Value="10,7"/></Style>
+    <Style x:Key="Segment" TargetType="RadioButton">
+      <Setter Property="Cursor" Value="Hand"/><Setter Property="Foreground" Value="#7A8498"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RadioButton">
+        <Border x:Name="Plate" Background="Transparent" CornerRadius="7" Padding="24,10"><ContentPresenter HorizontalAlignment="Center"/></Border>
+        <ControlTemplate.Triggers><Trigger Property="IsChecked" Value="True"><Setter TargetName="Plate" Property="Background" Value="White"/><Setter Property="Foreground" Value="#5145CE"/><Setter Property="FontWeight" Value="SemiBold"/></Trigger><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.45"/></Trigger></ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style TargetType="CheckBox"><Setter Property="VerticalContentAlignment" Value="Center"/><Setter Property="Foreground" Value="#66728A"/></Style>
+    <Style x:Key="Caption" TargetType="TextBlock"><Setter Property="FontSize" Value="12"/><Setter Property="Foreground" Value="#7B8599"/></Style>
+    <Style x:Key="Section" TargetType="TextBlock"><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="0,0,0,10"/></Style>
+    <Style TargetType="ProgressBar"><Setter Property="Height" Value="5"/><Setter Property="Foreground" Value="#6558E8"/><Setter Property="Background" Value="#EAE8FC"/><Setter Property="BorderThickness" Value="0"/></Style>
+  </Window.Resources>
+  <Grid Background="#F5F6FA">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="216"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Border Background="#182035">
+      <Grid Margin="22,30,22,24">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <StackPanel>
+          <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <Border Width="34" Height="34" CornerRadius="10" Background="#7768F2" Margin="0,0,10,0"><TextBlock Text="↓" Foreground="White" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-3,0,0"/></Border>
+            <TextBlock Text="VideoDrop" Foreground="White" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
+          </StackPanel>
+          <TextBlock Text="ВИДЕО. МУЗЫКА. У ТЕБЯ." FontSize="9" Foreground="#8792AF" Margin="1,8,0,34"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+          <Border CornerRadius="9" Background="#2B3152" Padding="14,13" Margin="0,0,0,8"><TextBlock Text="↓     Скачать" Foreground="#DAD4FF" FontWeight="SemiBold"/></Border>
+          <Button x:Name="OpenFolder" Style="{StaticResource Nav}" Content="▱     Мои файлы" HorizontalAlignment="Stretch" ToolTip="Открыть выбранную папку"/>
+          <Border Height="1" Background="#30394F" Margin="8,24,8,18"/>
+          <TextBlock Text="ПРИЛОЖЕНИЕ" FontSize="10" Foreground="#7C87A2" Margin="14,0,0,10"/>
+          <Button x:Name="UpdateEngine" Style="{StaticResource Nav}" Content="↻     Обновить yt-dlp" ToolTip="Проверить официальный выпуск yt-dlp на GitHub"/>
+          <Button x:Name="Help" Style="{StaticResource Nav}" Content="?     О программе"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Margin="10,0,0,0">
+          <StackPanel Orientation="Horizontal"><Ellipse Fill="#6AD1AD" Width="6" Height="6" Margin="0,0,7,0"/><TextBlock Text="Всё в комплекте" Foreground="#C4CCDE" FontSize="12"/></StackPanel>
+          <TextBlock Text="Portable · v1.1.0" Foreground="#74809D" FontSize="11" Margin="13,7,0,0"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+    <Grid Grid.Column="1" Margin="36,28,36,22"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions><Grid Margin="0,0,0,24">
+          <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <StackPanel><TextBlock Text="ТВОЯ МЕДИАТЕКА НАЧИНАЕТСЯ ЗДЕСЬ" FontSize="10" Foreground="#8B92A6" FontWeight="SemiBold"/><TextBlock Text="Скачать видео" FontSize="30" FontWeight="Bold" Margin="0,6,0,5"/><TextBlock Text="Сохрани любимое — в пару кликов." Foreground="#798399"/></StackPanel>
+          <Border Grid.Column="1" Background="#EAE7FF" CornerRadius="6" Padding="10,5" VerticalAlignment="Top" Margin="12,21,0,0"><TextBlock Text="YouTube" FontSize="11" Foreground="#6557CC" FontWeight="SemiBold"/></Border>
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,16"><StackPanel><Border Background="White" CornerRadius="16" BorderBrush="#E8EBF2" BorderThickness="1" Padding="24">
+          <StackPanel>
+            <Grid Margin="0,0,0,12"><TextBlock Text="Ссылка на видео" FontWeight="SemiBold" VerticalAlignment="Center"/><Button x:Name="Paste" Content="Вставить ссылку" HorizontalAlignment="Right" Padding="12,6" FontSize="12" Background="#F5F4FF" Foreground="#6558CC" BorderThickness="0"/></Grid>
+            <Border x:Name="UrlBorder" CornerRadius="10" BorderBrush="#DEE2EC" BorderThickness="1" Background="#FBFCFE" Padding="14,12">
+              <Grid>
+                <TextBox x:Name="Urls" AutomationProperties.Name="Ссылки на YouTube" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="56" MaxHeight="110" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top"/>
+                <TextBlock x:Name="Placeholder" Text="https://www.youtube.com/watch?v=…" Foreground="#A0A8B9" IsHitTestVisible="False" Margin="0,2,0,0"/>
+              </Grid>
+            </Border>
+            <TextBlock Text="Несколько видео? Добавь каждую ссылку с новой строки." Style="{StaticResource Caption}" Margin="0,9,0,22"/>
+            <Grid>
+              <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+              <StackPanel Margin="0,0,20,0"><TextBlock Text="Что сохранить" Style="{StaticResource Section}"/><Border Background="#F0F1F6" CornerRadius="10" Padding="4" HorizontalAlignment="Left"><StackPanel Orientation="Horizontal"><RadioButton x:Name="Video" GroupName="Mode" Content="Видео · MP4" IsChecked="True" Style="{StaticResource Segment}"/><RadioButton x:Name="Audio" GroupName="Mode" Content="Звук · MP3" Style="{StaticResource Segment}"/></StackPanel></Border></StackPanel>
+              <StackPanel Grid.Column="1"><TextBlock Text="Качество" Style="{StaticResource Section}"/><ComboBox x:Name="Quality" AutomationProperties.Name="Качество видео" SelectedIndex="1"><ComboBoxItem Content="480p"/><ComboBoxItem Content="720p"/><ComboBoxItem Content="1080p"/><ComboBoxItem Content="1440p"/><ComboBoxItem Content="2160p · 4K"/><ComboBoxItem Content="Лучшее"/></ComboBox></StackPanel>
+            </Grid>
+            <CheckBox x:Name="Playlist" Content="Скачать весь плейлист" Margin="1,18,0,22"/>
+            <Border Height="1" Background="#EEF0F5" Margin="0,0,0,20"/>
+            <TextBlock Text="Папка сохранения" Style="{StaticResource Section}"/>
+            <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+              <Border Background="#F8F9FC" CornerRadius="8" BorderBrush="#E3E6EF" BorderThickness="1" Padding="12,10" Margin="0,0,10,0"><TextBox x:Name="Folder" AutomationProperties.Name="Папка сохранения" ToolTip="Путь к папке с видео"/></Border>
+              <Button x:Name="Browse" Content="Выбрать…" Grid.Column="1" Padding="16,10"/>
+            </Grid>
+            <StackPanel VerticalAlignment="Center" Margin="0,12,0,0"><TextBlock x:Name="QualityHint" Text="До 720p · MP4 со звуком" FontSize="12" Foreground="#778198"/></StackPanel>
+              </StackPanel>
+        </Border>
+        </StackPanel></ScrollViewer><Border Background="White" CornerRadius="13" BorderBrush="#E8EBF2" BorderThickness="1" Padding="20,16" Margin="0" Grid.Row="3">
+          <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,16,0">
+              <TextBlock x:Name="Status" Text="Подготавливаем компоненты…" FontWeight="SemiBold" FontSize="13" TextTrimming="CharacterEllipsis"/>
+              <TextBlock x:Name="Detail" Text="Только при первом запуске" Style="{StaticResource Caption}" Margin="0,5,0,10" TextTrimming="CharacterEllipsis"/>
+              <ProgressBar x:Name="Progress" Minimum="0" Maximum="100" IsIndeterminate="True"/>
+            </StackPanel>
+            <Button x:Name="Cancel" Grid.Column="1" Content="Отменить" VerticalAlignment="Center" Padding="13,8" FontSize="12" Visibility="Collapsed" Margin="0,0,12,0"/>
+          <Button x:Name="Start" Grid.Column="2" Content="↓   Скачать" Background="#5C50E5" Foreground="White" BorderThickness="0" Padding="24,12" FontSize="15" IsEnabled="False" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+        <Expander x:Name="LogPanel" Header="Подробности загрузки" Foreground="#8790A3" FontSize="12" Margin="4,0,4,14" Grid.Row="2">
+          <Border Background="#EDF0F6" CornerRadius="8" Padding="12" Margin="0,10,0,0"><TextBox x:Name="Log" IsReadOnly="True" TextWrapping="Wrap" Height="140" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="11" Foreground="#5C6880"/></Border>
+        </Expander>
+      </Grid></Grid>
+</Window>

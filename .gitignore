@@ -1,0 +1,8 @@
+build/
+dist/
+VideoDrop-data/
+Downloads/
+*.user
+*.log
+__pycache__/
+.vs/

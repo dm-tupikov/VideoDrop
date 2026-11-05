@@ -1,0 +1,46 @@
+VideoDrop Portable — components and source locations
+
+VideoDrop GUI 1.1.0: https://github.com/dm-tupikov/VideoDrop, MIT license.
+Copyright (c) 2026 dm-tupikov. Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom
+the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+yt-dlp 2026.10.26 (official Windows x64 standalone build):
+https://github.com/yt-dlp/yt-dlp/releases/tag/2026.10.26
+https://github.com/yt-dlp/yt-dlp
+See yt-dlp-LICENSE.txt. The standalone executable also bundles Python,
+yt-dlp-ejs and libraries under their respective licenses; see upstream:
+https://github.com/yt-dlp/yt-dlp#licensing
+https://github.com/yt-dlp/yt-dlp/tree/2026.10.26/bundle
+
+Deno 2.9.8 (official Windows x64 binary):
+https://github.com/denoland/deno/releases/tag/v2.9.8
+https://github.com/denoland/deno/tree/v2.9.8
+See Deno-LICENSE.txt and the source repository's third_party folder for
+the bundled V8, Rust and other dependency notices.
+
+FFmpeg and ffprobe 9.0.2, Gyan essentials build (GPL v3):
+https://github.com/GyanD/codexffmpeg/releases/tag/9.0.2
+https://www.gyan.dev/ffmpeg/builds/
+See LICENSE and README.txt (upstream build configuration and library list).
+Corresponding FFmpeg source release:
+https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz
+https://github.com/FFmpeg/FFmpeg/tree/n9.0.2
+Build scripts and dependencies:
+https://github.com/GyanD/codexffmpeg
+
+All executables are included locally. No remote script/component download
+is enabled by the wrapper. The optional yt-dlp update button uses the
+official yt-dlp self-updater.
