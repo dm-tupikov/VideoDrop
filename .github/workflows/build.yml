@@ -1,8 +1,7 @@
 name: Windows build
 
-on:
+"on":
   push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -12,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
